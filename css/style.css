@@ -11,7 +11,7 @@ body {
     background: #0a0a0a;
 }
 
-/* ===== LOGIN ===== */
+/* ===== LOGIN PAGE ===== */
 #loginPage {
     position: fixed;
     top: 0;
@@ -31,29 +31,32 @@ body {
     pointer-events: none;
 }
 
-#bgVideo {
+/* Login Background Image */
+.login-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background: url('https://up6.cc/2026/09/178861672452491.jpeg') center/cover no-repeat;
+    opacity: 0.6;
     z-index: 0;
-    opacity: 0.7;
 }
-.video-overlay {
+
+/* Hacking Lines (Binary Rain) */
+#binaryCanvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 0;
+    z-index: 1;
+    opacity: 0.5;
 }
 
 .login-box {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     background: rgba(255, 255, 255, 0.05);
     padding: 40px 30px;
     border-radius: 20px;
@@ -62,7 +65,7 @@ body {
     text-align: center;
     width: 90%;
     max-width: 380px;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(0px);
 }
 
 .dp-container {
@@ -70,9 +73,11 @@ body {
     justify-content: center;
     margin-bottom: 15px;
 }
+
+/* ===== DP — BADA SIZE ===== */
 .dp-circle {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #00ffff;
@@ -213,11 +218,11 @@ body {
     width: 100%;
     height: 100%;
     background: url('../main-bg.webp') center/cover no-repeat;
-    opacity: 0.45;
+    opacity: 0.4;
     z-index: 0;
 }
 
-#hackingLines {
+#matrixCanvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -249,6 +254,7 @@ body {
     border: 1px solid rgba(0, 255, 255, 0.1);
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 10px;
 }
 
 .user-info {
@@ -266,7 +272,6 @@ body {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
-/* ===== GLITCH TEXT ===== */
 .glitch-text {
     font-family: 'Orbitron', monospace;
     font-size: 1.6rem;
@@ -334,17 +339,16 @@ body {
     color: #000;
 }
 
-/* ===== HACKER GRID ===== */
-.hacker-grid {
+/* ===== HACKER DASHBOARD ===== */
+.hacker-dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
-    margin: 10px 0;
     flex: 1;
 }
 
 .hacker-card {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     border: 1px solid rgba(0, 255, 255, 0.1);
     border-radius: 12px;
     padding: 12px;
@@ -360,78 +364,46 @@ body {
 
 .hacker-card .card-title {
     color: #00ffff;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 1px solid rgba(0, 255, 255, 0.1);
     padding-bottom: 5px;
     margin-bottom: 8px;
 }
-.hacker-card .card-content {
+
+.hacker-card .card-body {
     flex: 1;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: #aaa;
     overflow-y: auto;
-    max-height: 100px;
+    max-height: 150px;
 }
-.hacker-card .card-content .highlight {
+
+/* Code Block */
+.code-block {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 0.6rem;
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 6px;
+    line-height: 1.6;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.target-info {
+    font-size: 0.6rem;
+    color: #aaa;
+    margin: 2px 0;
+}
+.target-info .highlight {
     color: #00ff88;
 }
 
-/* ===== MAP CARD ===== */
-.map-card {
-    grid-row: span 2;
-}
-.map-container {
-    position: relative;
-    overflow: hidden;
-    height: 200px;
-    cursor: grab;
-}
-.map-container:active {
-    cursor: grabbing;
-}
-.world-map {
-    width: 100%;
-    height: 100%;
-    transition: transform 0.1s;
-}
-.continent {
-    transition: 0.3s;
-}
-.continent:hover {
-    fill: rgba(0, 255, 255, 0.15);
-}
-.target-dot {
-    cursor: pointer;
-}
-.target-dot:hover {
-    r: 10px;
-    fill: #ff00ff;
-}
-
-.map-controls {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
-}
-.map-btn {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    color: #00ffff;
-    padding: 4px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    transition: 0.3s;
-}
-.map-btn:hover {
-    background: rgba(0, 255, 255, 0.1);
-}
-
-/* ===== PASSWORD CRACKER ===== */
 .pwd-display {
     background: rgba(0, 255, 0, 0.05);
     border: 1px solid rgba(0, 255, 0, 0.1);
@@ -443,7 +415,14 @@ body {
     word-break: break-all;
 }
 
-/* ===== FIREWALL ===== */
+.legal-note {
+    font-size: 0.5rem;
+    color: #ff4444;
+    margin-top: 4px;
+    opacity: 0.7;
+}
+
+/* Firewall */
 .firewall-bar {
     width: 100%;
     height: 6px;
@@ -460,24 +439,50 @@ body {
     transition: width 0.3s;
 }
 
+/* Start Card */
+.start-card {
+    border-color: rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.03);
+}
+.start-btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+.start-btn:hover {
+    background: #00ffff;
+    color: #000;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+}
+
 /* ===== ACTION BUTTONS ===== */
 .action-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin: 5px 0;
+    margin-top: 6px;
 }
 .action-btn {
     background: transparent;
     border: 1px solid rgba(0, 255, 255, 0.2);
     color: #00ffff;
-    padding: 6px 14px;
-    border-radius: 8px;
+    padding: 5px 12px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     transition: 0.3s;
     flex: 1;
-    min-width: 60px;
+    min-width: 50px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -527,16 +532,13 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-    .hacker-grid {
+    .hacker-dashboard {
         grid-template-columns: 1fr 1fr;
-    }
-    .map-card {
-        grid-row: span 1;
     }
 }
 
 @media (max-width: 768px) {
-    .hacker-grid {
+    .hacker-dashboard {
         grid-template-columns: 1fr;
     }
     .top-bar {
@@ -558,11 +560,8 @@ body {
         font-size: 1.5rem;
     }
     .dp-circle {
-        width: 60px;
-        height: 60px;
-    }
-    .map-container {
-        height: 150px;
+        width: 80px;
+        height: 80px;
     }
 }
 
@@ -576,14 +575,14 @@ body {
     .hacker-card .card-title {
         font-size: 0.5rem;
     }
-    .hacker-card .card-content {
-        font-size: 0.6rem;
-        max-height: 50px;
+    .hacker-card .card-body {
+        font-size: 0.55rem;
+        max-height: 100px;
     }
     .action-btn {
-        font-size: 0.5rem;
-        padding: 4px 10px;
-        min-width: 50px;
+        font-size: 0.45rem;
+        padding: 4px 8px;
+        min-width: 40px;
     }
     .glitch-text {
         font-size: 1rem;
@@ -592,8 +591,9 @@ body {
         width: 28px;
         height: 28px;
     }
-    .map-container {
-        height: 120px;
+    .dp-circle {
+        width: 70px;
+        height: 70px;
     }
 }
 
