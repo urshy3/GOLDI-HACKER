@@ -31,19 +31,20 @@ body {
     pointer-events: none;
 }
 
-/* Login Background Image */
+/* ===== LOGIN BACKGROUND IMAGE (NO BLUR) ===== */
 .login-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://up6.cc/2026/09/178861672452491.jpeg') center/cover no-repeat;
+    background: url('https://up6.cc/2026/09/178861811228831.jpeg') center/cover no-repeat;
     opacity: 0.6;
     z-index: 0;
+    /* NO BLUR — removed filter: blur() */
 }
 
-/* Hacking Lines (Binary Rain) */
+/* ===== HACKING LINES (BINARY RAIN) ===== */
 #binaryCanvas {
     position: absolute;
     top: 0;
@@ -54,6 +55,7 @@ body {
     opacity: 0.5;
 }
 
+/* ===== LOGIN BOX — NO BLUR ===== */
 .login-box {
     position: relative;
     z-index: 2;
@@ -65,7 +67,7 @@ body {
     text-align: center;
     width: 90%;
     max-width: 380px;
-    backdrop-filter: blur(0px);
+    /* NO BLUR — removed backdrop-filter: blur() */
 }
 
 .dp-container {
