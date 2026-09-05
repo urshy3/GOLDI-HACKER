@@ -22,9 +22,6 @@ function showLoading() {
     overlay.classList.add('active');
     document.getElementById('loginPage').classList.add('hidden');
 
-    const video = document.getElementById('bgVideo');
-    if (video) video.pause();
-
     let progress = 0;
     const bar = document.getElementById('loadBar');
     const interval = setInterval(() => {
@@ -43,9 +40,9 @@ function showLoading() {
     }, 120);
 }
 
-// ===== HACKING LINES (Medium Size) =====
-function startHackingLines() {
-    const canvas = document.getElementById('hackingLines');
+// ===== BINARY RAIN (Login Page) =====
+function startBinaryRain() {
+    const canvas = document.getElementById('binaryCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -56,7 +53,7 @@ function startHackingLines() {
     const drops = [];
     for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
 
-    function drawLines() {
+    function drawBinary() {
         ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = fontSize + 'px monospace';
@@ -65,7 +62,7 @@ function startHackingLines() {
             const char = chars[Math.floor(Math.random() * chars.length)];
             const x = i * fontSize;
             const y = drops[i] * fontSize;
-            const colors = ['#00ff88', '#00ffff', '#ffffff', '#33ff99'];
+            const colors = ['#00ff88', '#00ffff', '#ffffff'];
             ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
             ctx.shadowBlur = 8;
             ctx.shadowColor = '#00ff88';
@@ -74,7 +71,48 @@ function startHackingLines() {
             drops[i] += 0.5;
         }
     }
-    setInterval(drawLines, 60);
+    setInterval(drawBinary, 60);
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// ===== MATRIX RAIN (Main Page) =====
+function startMatrix() {
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = [];
+    for (let i = 0; i < columns; i++) drops[i] = Math.random() * -100;
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            const gradient = ctx.createLinearGradient(x, y, x, y + fontSize);
+            gradient.addColorStop(0, '#00ff88');
+            gradient.addColorStop(0.5, '#00ffff');
+            gradient.addColorStop(1, '#ff00ff');
+            ctx.fillStyle = gradient;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#00ffff';
+            ctx.fillText(char, x, y);
+            if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i] += 0.5;
+        }
+    }
+    setInterval(drawMatrix, 50);
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -84,11 +122,11 @@ function startHackingLines() {
 // ===== MAIN PAGE =====
 function startMainPage() {
     startClock();
-    startHackingLines();
-    updateConsole('🟢 System initialized', 'green');
-    updateCompile('⏳ Compiler ready');
-    updateNN('🧠 Neural network idle');
-    updateFirewall('🔒 Firewall active', 0);
+    startMatrix();
+    updateConsole('# Program Console\n&nbsp;&nbsp;System ready...');
+    updateCompile('a._definePropertyBroken = 10,\nb[i] = e\na.migrateVersion = "1.4.1";');
+    updateNN('// Initializing neural network...\n&nbsp;&nbsp;Loading weights...\n&nbsp;&nbsp;Training model...');
+    updateFirewall('🔒 SECURE', 0);
 }
 
 // ===== CLOCK =====
@@ -99,118 +137,22 @@ function startClock() {
     }, 1000);
 }
 
-// ===== CONSOLE FUNCTIONS =====
-function updateConsole(msg, type = '') {
-    const el = document.getElementById('consoleOutput');
-    const colors = { green: '#00ff88', red: '#ff4444', yellow: '#ffaa00' };
-    const color = colors[type] || '#aaa';
-    const line = document.createElement('div');
-    line.innerHTML = `<span style="color:${color};">${msg}</span>`;
-    el.appendChild(line);
-    el.scrollTop = el.scrollHeight;
-    if (el.children.length > 20) el.removeChild(el.firstChild);
+// ===== UPDATE FUNCTIONS =====
+function updateConsole(msg) {
+    document.getElementById('consoleOutput').innerHTML = msg;
 }
 
-function updateCompile(msg, type = '') {
-    const el = document.getElementById('compileOutput');
-    const colors = { green: '#00ff88', red: '#ff4444', yellow: '#ffaa00' };
-    const color = colors[type] || '#aaa';
-    const line = document.createElement('div');
-    line.innerHTML = `<span style="color:${color};">${msg}</span>`;
-    el.appendChild(line);
-    el.scrollTop = el.scrollHeight;
-    if (el.children.length > 20) el.removeChild(el.firstChild);
+function updateCompile(msg) {
+    document.getElementById('compileOutput').innerHTML = msg;
 }
 
-function updateNN(msg, type = '') {
-    const el = document.getElementById('nnOutput');
-    const colors = { green: '#00ff88', red: '#ff4444', yellow: '#ffaa00' };
-    const color = colors[type] || '#aaa';
-    const line = document.createElement('div');
-    line.innerHTML = `<span style="color:${color};">${msg}</span>`;
-    el.appendChild(line);
-    el.scrollTop = el.scrollHeight;
-    if (el.children.length > 20) el.removeChild(el.firstChild);
+function updateNN(msg) {
+    document.getElementById('nnOutput').innerHTML = msg;
 }
 
-function updateFirewall(msg, progress) {
-    document.getElementById('firewallStatus').textContent = msg;
+function updateFirewall(status, progress) {
+    document.getElementById('firewallStatus').textContent = status;
     document.getElementById('firewallFill').style.width = progress + '%';
-}
-
-// ===== MAP FUNCTIONS =====
-let mapScale = 1;
-let mapX = 0;
-let mapY = 0;
-let isDragging = false;
-let startX, startY;
-
-document.addEventListener('DOMContentLoaded', function() {
-    const map = document.querySelector('.world-map');
-    const container = document.querySelector('.map-container');
-
-    if (map && container) {
-        // Drag functionality
-        container.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX - mapX;
-            startY = e.clientY - mapY;
-            container.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            mapX = e.clientX - startX;
-            mapY = e.clientY - startY;
-            map.style.transform = `translate(${mapX}px, ${mapY}px) scale(${mapScale})`;
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            container.style.cursor = 'grab';
-        });
-
-        // Touch support
-        let touchStartX, touchStartY;
-        container.addEventListener('touchstart', (e) => {
-            const touch = e.touches[0];
-            touchStartX = touch.clientX - mapX;
-            touchStartY = touch.clientY - mapY;
-        }, { passive: true });
-
-        container.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            mapX = touch.clientX - touchStartX;
-            mapY = touch.clientY - touchStartY;
-            map.style.transform = `translate(${mapX}px, ${mapY}px) scale(${mapScale})`;
-        }, { passive: false });
-
-        // Target click info
-        document.querySelectorAll('.target-dot').forEach(dot => {
-            dot.addEventListener('click', function(e) {
-                const title = this.querySelector('title')?.textContent || 'Unknown';
-                updateConsole(`🎯 Target selected: ${title}`, 'yellow');
-            });
-        });
-    }
-});
-
-function zoomMap(direction) {
-    if (direction === 'in' && mapScale < 2) mapScale += 0.2;
-    if (direction === 'out' && mapScale > 0.5) mapScale -= 0.2;
-    const map = document.querySelector('.world-map');
-    map.style.transform = `translate(${mapX}px, ${mapY}px) scale(${mapScale})`;
-    updateConsole(`🔍 Map zoom: ${Math.round(mapScale * 100)}%`, 'yellow');
-}
-
-function resetMap() {
-    mapScale = 1;
-    mapX = 0;
-    mapY = 0;
-    const map = document.querySelector('.world-map');
-    map.style.transform = `translate(0, 0) scale(1)`;
-    updateConsole('🗺️ Map reset', 'green');
 }
 
 // ===== PASSWORD CRACKER =====
@@ -221,6 +163,7 @@ function crackPassword() {
     const status = document.getElementById('crackerStatus');
     const statusText = document.getElementById('crackerStatusText');
 
+    if (!statusText) return;
     status.className = 'status-dot yellow';
     statusText.textContent = 'Cracking...';
     display.textContent = '⏳ Brute forcing...';
@@ -243,7 +186,6 @@ function crackPassword() {
             display.textContent = '✅ Password: ' + finalPwd;
             status.className = 'status-dot green';
             statusText.textContent = 'Cracked!';
-            updateConsole('✅ Password cracked: ' + finalPwd, 'green');
         }
     }, 150);
 }
@@ -251,36 +193,20 @@ function crackPassword() {
 function resetPassword() {
     if (crackInterval) clearInterval(crackInterval);
     const display = document.getElementById('pwdDisplay');
-    const status = document.getElementById('crackerStatus');
-    const statusText = document.getElementById('crackerStatusText');
-
     display.textContent = '🔄 Resetting...';
-    status.className = 'status-dot yellow';
-    statusText.textContent = 'Resetting...';
 
     setTimeout(() => {
         const newPwd = 'new_pass_' + Math.floor(Math.random() * 9999);
         display.textContent = '✅ New: ' + newPwd;
-        status.className = 'status-dot green';
-        statusText.textContent = 'Reset!';
-        updateConsole('🔑 Password reset: ' + newPwd, 'yellow');
     }, 2000);
 }
 
 function pwnTarget() {
-    const status = document.getElementById('crackerStatus');
-    const statusText = document.getElementById('crackerStatusText');
     const display = document.getElementById('pwdDisplay');
-
-    status.className = 'status-dot red';
-    statusText.textContent = 'Pwning...';
     display.textContent = '💀 Pwnatrating...';
 
     setTimeout(() => {
         display.textContent = '💀 Pwned! Admin access!';
-        status.className = 'status-dot red';
-        statusText.textContent = 'Pwned!';
-        updateConsole('💀 Target pwned! Admin access granted!', 'red');
     }, 2500);
 }
 
@@ -291,123 +217,113 @@ let nnRunning = false;
 function startNN() {
     if (nnRunning) return;
     nnRunning = true;
-    updateNN('▶️ Neural trace started...', 'green');
+    updateNN('▶️ Neural trace started...\n&nbsp;&nbsp;Analyzing patterns...');
 
     let step = 0;
     nnInterval = setInterval(() => {
         step++;
         const nodes = ['Input', 'Hidden1', 'Hidden2', 'Output'];
         const weights = (Math.random() * 2 - 1).toFixed(4);
-        const activation = ['ReLU', 'Sigmoid', 'Tanh', 'Softmax'][Math.floor(Math.random() * 4)];
-        updateNN(`🧠 Layer ${nodes[step % nodes.length]} | Weight: ${weights} | ${activation}`,
-            step % 2 === 0 ? 'green' : 'yellow');
-        if (step > 15) {
+        updateNN(`🧠 Layer ${nodes[step % nodes.length]}\n&nbsp;&nbsp;Weight: ${weights}\n&nbsp;&nbsp;Processing...`);
+        if (step > 10) {
             stopNN();
-            updateNN('✅ Neural trace complete! Pattern detected.', 'green');
+            updateNN('✅ Neural trace complete!\n&nbsp;&nbsp;Pattern detected: BACKDOOR');
         }
-    }, 600);
+    }, 800);
 }
 
 function stopNN() {
     if (nnInterval) clearInterval(nnInterval);
     nnRunning = false;
-    updateNN('⏹ Neural trace stopped', 'yellow');
+    updateNN('⏹ Neural trace stopped');
 }
 
 function analyzeNN() {
-    updateNN('📊 Analyzing patterns...', 'yellow');
+    updateNN('📊 Analyzing neural patterns...');
     setTimeout(() => {
         const patterns = ['Backdoor detected', 'Anomaly found', 'Normal traffic', 'Suspicious activity'];
         const result = patterns[Math.floor(Math.random() * patterns.length)];
-        updateNN('📊 Result: ' + result, result.includes('detected') ? 'red' : 'green');
+        updateNN('📊 Result: ' + result);
     }, 1500);
 }
 
 // ===== COMPILING =====
 function compileCode() {
-    updateCompile('🔨 Compiling...', 'yellow');
+    updateCompile('🔨 Compiling...\n&nbsp;&nbsp;Checking syntax...');
     setTimeout(() => {
         const errors = Math.random() > 0.7 ? '⚠️ 2 warnings' : '✅ No errors';
-        updateCompile('✅ Compiled! ' + errors, errors.includes('warnings') ? 'yellow' : 'green');
+        updateCompile('✅ Compiled successfully!\n&nbsp;&nbsp;' + errors);
     }, 2000);
 }
 
 function runCode() {
-    updateCompile('▶️ Running...', 'green');
+    updateCompile('▶️ Running executable...');
     setTimeout(() => {
         const outputs = ['Hello World', 'System ready', 'Access granted', 'Segmentation fault'];
         const result = outputs[Math.floor(Math.random() * outputs.length)];
-        updateCompile('📤 ' + result, result.includes('fault') ? 'red' : 'green');
+        updateCompile('📤 Output: ' + result);
     }, 1500);
 }
 
 function debugCode() {
-    updateCompile('🐛 Debugging...', 'yellow');
+    updateCompile('🐛 Debugging...');
     setTimeout(() => {
         const bugs = ['Null pointer at line 42', 'Buffer overflow risk', 'Memory leak', 'All clean!'];
         const result = bugs[Math.floor(Math.random() * bugs.length)];
-        updateCompile('🐛 ' + result, result.includes('clean') ? 'green' : 'red');
+        updateCompile('🐛 ' + result);
     }, 1800);
 }
 
 // ===== SYSTEM CONSOLE =====
 function scanNetwork() {
-    updateConsole('📡 Scanning network...', 'yellow');
+    updateConsole('📡 Scanning network...');
     setTimeout(() => {
         const ips = ['192.168.1.1', '10.0.0.1', '172.16.0.1', '23.86.111.9'];
         const ports = [22, 80, 443, 8080, 3306];
         const ip = ips[Math.floor(Math.random() * ips.length)];
         const port = ports[Math.floor(Math.random() * ports.length)];
-        updateConsole(`📡 Found: ${ip}:${port} (open)`, 'green');
+        updateConsole(`📡 Found: ${ip}:${port} (open)`);
     }, 2000);
 }
 
 function exploitVuln() {
-    updateConsole('💥 Exploiting vulnerability...', 'red');
+    updateConsole('💥 Exploiting vulnerability...');
     setTimeout(() => {
         const vulns = ['CVE-2024-1234', 'CVE-2023-5678', 'CVE-2025-9012'];
         const vuln = vulns[Math.floor(Math.random() * vulns.length)];
         const result = Math.random() > 0.4 ? '✅ Success!' : '❌ Failed';
-        updateConsole(`💥 ${vuln}: ${result}`, result.includes('Success') ? 'green' : 'red');
+        updateConsole(`💥 ${vuln}: ${result}`);
     }, 2500);
 }
 
 function getShell() {
-    updateConsole('🐚 Spawning shell...', 'yellow');
+    updateConsole('🐚 Spawning shell...');
     setTimeout(() => {
-        updateConsole('🐚 Shell opened!', 'green');
-        setTimeout(() => {
-            updateConsole('🐚 $ whoami ➜ root', 'green');
-            setTimeout(() => {
-                updateConsole('🐚 $ pwd ➜ /root', 'green');
-            }, 800);
-        }, 800);
-    }, 1000);
+        updateConsole('🐚 Shell opened!\n$ whoami ➜ root\n$ pwd ➜ /root');
+    }, 1500);
 }
 
-// ===== FIREWALL BYPASS =====
-let firewallProgress = 0;
+// ===== FIREWALL =====
 let firewallInterval = null;
 
 function bypassFirewall() {
     const status = document.getElementById('firewallStatus');
     const fill = document.getElementById('firewallFill');
+    let progress = 0;
 
     if (firewallInterval) clearInterval(firewallInterval);
-    firewallProgress = 0;
-    status.textContent = '🚀 Bypassing...';
+    status.textContent = '🚀 BYPASSING...';
     status.style.color = '#ffaa00';
 
     firewallInterval = setInterval(() => {
-        firewallProgress += Math.random() * 5 + 2;
-        if (firewallProgress > 100) firewallProgress = 100;
-        fill.style.width = firewallProgress + '%';
+        progress += Math.random() * 5 + 2;
+        if (progress > 100) progress = 100;
+        fill.style.width = progress + '%';
 
-        if (firewallProgress >= 100) {
+        if (progress >= 100) {
             clearInterval(firewallInterval);
             status.textContent = '✅ BYPASSED! 🔓';
             status.style.color = '#00ff88';
-            updateConsole('🚀 Firewall bypassed! Access granted!', 'green');
         }
     }, 150);
 }
@@ -415,24 +331,42 @@ function bypassFirewall() {
 function attackFirewall() {
     const status = document.getElementById('firewallStatus');
     const fill = document.getElementById('firewallFill');
+    let progress = 0;
 
     if (firewallInterval) clearInterval(firewallInterval);
-    firewallProgress = 0;
     status.textContent = '⚡ ATTACKING...';
     status.style.color = '#ff4444';
 
     let attackInterval = setInterval(() => {
-        firewallProgress += Math.random() * 10 + 5;
-        if (firewallProgress > 100) firewallProgress = 100;
-        fill.style.width = firewallProgress + '%';
+        progress += Math.random() * 10 + 5;
+        if (progress > 100) progress = 100;
+        fill.style.width = progress + '%';
 
-        if (firewallProgress >= 100) {
+        if (progress >= 100) {
             clearInterval(attackInterval);
-            status.textContent = '💥 FIREWALL DESTROYED!';
+            status.textContent = '💥 DESTROYED!';
             status.style.color = '#ff4444';
-            updateConsole('💥 Firewall destroyed! System compromised!', 'red');
         }
     }, 100);
+}
+
+// ===== START HACK =====
+function startHack() {
+    const status = document.querySelector('.start-card .status-dot');
+    const statusText = document.querySelector('.start-card .status-dot')?.parentElement;
+    
+    if (status) {
+        status.className = 'status-dot yellow';
+        if (statusText) statusText.innerHTML = '⏳ Initializing...';
+    }
+    
+    setTimeout(() => {
+        if (status) {
+            status.className = 'status-dot green';
+            if (statusText) statusText.innerHTML = '🚀 HACK INITIATED! All systems go!';
+        }
+        updateConsole('🚀 HACK INITIATED!\n&nbsp;&nbsp;All systems operational\n&nbsp;&nbsp;Target acquired');
+    }, 2000);
 }
 
 // ===== LOGOUT =====
@@ -447,12 +381,9 @@ function logout() {
     if (firewallInterval) clearInterval(firewallInterval);
     nnRunning = false;
 
-    const video = document.getElementById('bgVideo');
-    if (video) video.play();
-
-    document.getElementById('consoleOutput').innerHTML = '<div style="color:#666;">⏳ Ready...</div>';
-    document.getElementById('compileOutput').innerHTML = '<div style="color:#666;">⏳ Ready...</div>';
-    document.getElementById('nnOutput').innerHTML = '<div style="color:#666;">⏳ Initializing...</div>';
+    document.getElementById('consoleOutput').innerHTML = '# Program Console\n&nbsp;&nbsp;Ready...';
+    document.getElementById('compileOutput').innerHTML = 'a._definePropertyBroken = 10,\nb[i] = e\na.migrateVersion = "1.4.1";';
+    document.getElementById('nnOutput').innerHTML = '// Initializing neural network...\n&nbsp;&nbsp;Loading weights...\n&nbsp;&nbsp;Training model...';
     document.getElementById('pwdDisplay').textContent = '⏳ Waiting...';
     document.getElementById('firewallFill').style.width = '0%';
     document.getElementById('firewallStatus').textContent = '🔒 SECURE';
@@ -468,3 +399,6 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// ===== START BINARY RAIN ON LOAD =====
+window.onload = startBinaryRain;
