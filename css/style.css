@@ -1,14 +1,18 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Courier New', monospace;
+    user-select: none;
 }
 
 body {
-    height: 100vh;
+    background-color: #030a03;
+    color: #00ff66;
+    font-family: 'Courier New', Courier, monospace;
     overflow: hidden;
-    background: #0a0a0a;
+    height: 100vh;
+    width: 100vw;
+    background-image: radial-gradient(circle at center, #051a05 0%, #010501 100%);
 }
 
 /* ===== LOGIN PAGE ===== */
@@ -21,8 +25,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0a0a0a;
-    z-index: 100;
+    z-index: 9999;
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 #loginPage.hidden {
@@ -31,7 +34,6 @@ body {
     pointer-events: none;
 }
 
-/* ===== LOGIN BACKGROUND IMAGE (NO BLUR) ===== */
 .login-bg {
     position: absolute;
     top: 0;
@@ -41,10 +43,8 @@ body {
     background: url('https://up6.cc/2026/09/178861811228831.jpeg') center/cover no-repeat;
     opacity: 0.6;
     z-index: 0;
-    /* NO BLUR — removed filter: blur() */
 }
 
-/* ===== HACKING LINES (BINARY RAIN) ===== */
 #binaryCanvas {
     position: absolute;
     top: 0;
@@ -52,22 +52,20 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
-/* ===== LOGIN BOX — NO BLUR ===== */
 .login-box {
     position: relative;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 10, 0, 0.85);
     padding: 40px 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+    border-radius: 16px;
+    border: 1.5px solid #00ff66;
+    box-shadow: 0 0 40px rgba(0, 255, 102, 0.15);
     text-align: center;
     width: 90%;
     max-width: 380px;
-    /* NO BLUR — removed backdrop-filter: blur() */
 }
 
 .dp-container {
@@ -75,64 +73,62 @@ body {
     justify-content: center;
     margin-bottom: 15px;
 }
-
-/* ===== DP — BADA SIZE ===== */
 .dp-circle {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #00ffff;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    border: 3px solid #00ff66;
+    box-shadow: 0 0 30px rgba(0, 255, 102, 0.3);
     transition: 0.3s;
 }
 .dp-circle:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 50px rgba(0, 255, 102, 0.5);
 }
 
 .login-box h1 {
-    color: #00ffff;
+    color: #00ff66;
     font-size: 2rem;
-    text-shadow: 0 0 20px #00ffff;
+    text-shadow: 0 0 20px #00ff66;
     letter-spacing: 3px;
     margin-bottom: 10px;
     font-family: 'Orbitron', monospace;
 }
 .login-box p {
-    color: #aaa;
+    color: #88cc88;
     font-size: 0.85rem;
     margin-bottom: 25px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 .login-box input {
     width: 100%;
     padding: 12px 15px;
     margin: 8px 0;
-    background: rgba(0, 255, 255, 0.05);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    border-radius: 10px;
-    color: #fff;
+    background: rgba(0, 255, 102, 0.05);
+    border: 1px solid rgba(0, 255, 102, 0.3);
+    border-radius: 8px;
+    color: #00ff66;
     font-size: 1rem;
     outline: none;
     transition: 0.3s;
 }
 .login-box input:focus {
-    border-color: #00ffff;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border-color: #00ff66;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
 }
 .login-box input::placeholder {
-    color: #555;
+    color: #446644;
 }
 .login-btn {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
     background: transparent;
-    border: 1px solid #00ffff;
-    color: #00ffff;
+    border: 1.5px solid #00ff66;
+    color: #00ff66;
     font-size: 1.1rem;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
     text-transform: uppercase;
@@ -140,9 +136,9 @@ body {
     font-weight: bold;
 }
 .login-btn:hover {
-    background: #00ffff;
+    background: #00ff66;
     color: #000;
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 40px rgba(0, 255, 102, 0.3);
 }
 .login-error {
     color: #ff4444;
@@ -163,7 +159,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 99;
+    z-index: 10000;
 }
 #loadingOverlay.active {
     display: flex;
@@ -198,7 +194,7 @@ body {
     100% { opacity: 1; transform: translateX(0); }
 }
 
-/* ===== MAIN PAGE ===== */
+/* ===== MAIN PAGE — HACKER OS ===== */
 #mainPage {
     position: fixed;
     top: 0;
@@ -206,406 +202,317 @@ body {
     width: 100%;
     height: 100%;
     display: none;
-    background: #0a0a0a;
+    background: #030a03;
     overflow: hidden;
 }
 #mainPage.active {
     display: block;
 }
 
-.main-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../main-bg.webp') center/cover no-repeat;
-    opacity: 0.4;
-    z-index: 0;
-}
-
-#matrixCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-.main-content {
+.desktop {
     position: relative;
-    z-index: 2;
-    padding: 15px;
-    height: 100vh;
+    width: 100%;
+    height: calc(100vh - 40px);
+    padding: 10px;
+}
+
+/* ===== WINDOWS ===== */
+.window {
+    position: absolute;
+    background: rgba(2, 15, 2, 0.95);
+    border: 1.5px solid #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
-    color: #fff;
-    overflow-y: auto;
+    overflow: hidden;
+    min-width: 280px;
+    min-height: 150px;
 }
 
-/* ===== TOP BAR ===== */
-.top-bar {
+.window-header {
+    background: #00ff66;
+    color: #000;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 15px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 12px;
-    border: 1px solid rgba(0, 255, 255, 0.1);
-    flex-wrap: wrap;
+    cursor: move;
+}
+.window-title {
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+.window-controls button {
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 4px;
+    font-family: monospace;
+}
+.window-controls button:hover {
+    background: #000;
+    color: #00ff66;
+}
+.window-body {
+    padding: 10px;
+    flex-grow: 1;
+    overflow: auto;
+    font-size: 12px;
+}
+
+/* Window Positions */
+#win-console {
+    top: 20px;
+    left: 20px;
+    width: 420px;
+    height: 280px;
+    z-index: 10;
+}
+#win-matrix {
+    top: 20px;
+    left: 460px;
+    width: 350px;
+    height: 250px;
+    z-index: 9;
+}
+#win-cracker {
+    top: 310px;
+    left: 20px;
+    width: 420px;
+    height: 290px;
+    z-index: 11;
+}
+
+.code-text {
+    color: #00ff66;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 11px;
+}
+
+#matrixCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ===== CRACKER ===== */
+.btn-group {
+    display: flex;
     gap: 8px;
     margin-bottom: 10px;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.dp-small {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #00ffff;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-}
-
-.glitch-text {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
-    position: relative;
-    animation: glitchText 3s infinite;
-    letter-spacing: 4px;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-}
-.glitch-text::before {
-    color: #ff00ff;
-    z-index: -1;
-    animation: glitchShift 0.3s infinite alternate;
-}
-.glitch-text::after {
-    color: #00ff88;
-    z-index: -2;
-    animation: glitchShift 0.4s infinite alternate-reverse;
-}
-
-@keyframes glitchText {
-    0% { transform: skew(0deg); }
-    5% { transform: skew(2deg); }
-    10% { transform: skew(-2deg); }
-    15% { transform: skew(0deg); }
-    100% { transform: skew(0deg); }
-}
-@keyframes glitchShift {
-    0% { transform: translate(2px, -2px); }
-    100% { transform: translate(-2px, 2px); }
-}
-
-.top-bar .clock {
-    color: #00ff88;
-    font-size: 0.8rem;
-    background: rgba(0, 255, 136, 0.05);
-    padding: 4px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 255, 136, 0.2);
-}
-.logout-btn {
-    background: transparent;
-    border: 1px solid #ff4444;
-    color: #ff4444;
-    padding: 5px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    transition: 0.3s;
-}
-.logout-btn:hover {
-    background: #ff4444;
-    color: #000;
-}
-
-/* ===== HACKER DASHBOARD ===== */
-.hacker-dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    flex: 1;
-}
-
-.hacker-card {
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(0, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 12px;
-    backdrop-filter: blur(5px);
-    display: flex;
-    flex-direction: column;
-    transition: 0.3s;
-}
-.hacker-card:hover {
-    border-color: rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.05);
-}
-
-.hacker-card .card-title {
-    color: #00ffff;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    padding-bottom: 5px;
-    margin-bottom: 8px;
-}
-
-.hacker-card .card-body {
-    flex: 1;
-    font-size: 0.65rem;
-    color: #aaa;
-    overflow-y: auto;
-    max-height: 150px;
-}
-
-/* Code Block */
-.code-block {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 255, 255, 0.05);
-    border-radius: 6px;
-    padding: 8px;
-    font-size: 0.6rem;
-    color: #00ff88;
-    font-family: 'Courier New', monospace;
-    margin-bottom: 6px;
-    line-height: 1.6;
-    max-height: 80px;
-    overflow-y: auto;
-}
-
-.target-info {
-    font-size: 0.6rem;
-    color: #aaa;
-    margin: 2px 0;
-}
-.target-info .highlight {
-    color: #00ff88;
-}
-
-.pwd-display {
-    background: rgba(0, 255, 0, 0.05);
-    border: 1px solid rgba(0, 255, 0, 0.1);
-    border-radius: 6px;
-    padding: 6px;
-    margin: 4px 0;
-    font-size: 0.65rem;
-    color: #00ff88;
-    word-break: break-all;
-}
-
-.legal-note {
-    font-size: 0.5rem;
-    color: #ff4444;
-    margin-top: 4px;
-    opacity: 0.7;
-}
-
-/* Firewall */
-.firewall-bar {
-    width: 100%;
-    height: 6px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    margin-top: 5px;
-    overflow: hidden;
-}
-.firewall-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #00ff88, #00ffff, #ff00ff);
-    border-radius: 10px;
-    transition: width 0.3s;
-}
-
-/* Start Card */
-.start-card {
-    border-color: rgba(0, 255, 255, 0.3);
-    background: rgba(0, 255, 255, 0.03);
-}
-.start-btn {
-    width: 100%;
-    padding: 12px;
-    background: transparent;
-    border: 2px solid #00ffff;
-    color: #00ffff;
-    font-size: 0.9rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: bold;
-    font-family: 'Orbitron', monospace;
-}
-.start-btn:hover {
-    background: #00ffff;
-    color: #000;
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
-}
-
-/* ===== ACTION BUTTONS ===== */
-.action-row {
-    display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 6px;
 }
 .action-btn {
     background: transparent;
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    color: #00ffff;
-    padding: 5px 12px;
-    border-radius: 6px;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    padding: 4px 14px;
     cursor: pointer;
-    font-size: 0.55rem;
-    transition: 0.3s;
-    flex: 1;
-    min-width: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 11px;
+    border-radius: 12px;
+    transition: 0.2s;
 }
 .action-btn:hover {
-    background: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-}
-.action-btn.green {
-    border-color: #00ff88;
-    color: #00ff88;
-}
-.action-btn.green:hover {
-    background: rgba(0, 255, 136, 0.1);
-}
-.action-btn.red {
-    border-color: #ff4444;
-    color: #ff4444;
-}
-.action-btn.red:hover {
-    background: rgba(255, 68, 68, 0.1);
-}
-.action-btn.yellow {
-    border-color: #ffaa00;
-    color: #ffaa00;
-}
-.action-btn.yellow:hover {
-    background: rgba(255, 170, 0, 0.1);
+    background: #00ff66;
+    color: #000;
+    box-shadow: 0 0 8px #00ff66;
 }
 
-.status-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: pulse 1s infinite;
+.input-row {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
-.status-dot.green { background: #00ff88; }
-.status-dot.red { background: #ff4444; }
-.status-dot.yellow { background: #ffaa00; }
+.input-row label {
+    width: 80px;
+    font-size: 11px;
+    color: #88cc88;
+}
+.input-row input {
+    background: #000;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    padding: 3px 6px;
+    font-family: inherit;
+    width: 180px;
+    font-size: 11px;
+}
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
+.crack-display {
+    border: 1px dashed #00ff66;
+    padding: 8px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 2px;
+    min-height: 35px;
+    background: rgba(0, 255, 102, 0.03);
+}
+.status-box {
+    font-size: 10px;
+    color: #00cc55;
+    margin-top: 5px;
+}
+
+/* ===== ICONS ===== */
+.icons-grid {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
+    gap: 15px;
+    z-index: 5;
+}
+.icon-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s;
+    color: #00ff66;
+}
+.icon-btn:hover {
+    border-color: #00ff66;
+    background: rgba(0, 255, 102, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+}
+.icon-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: #00ff66;
+    margin-bottom: 4px;
+}
+.icon-btn span {
+    font-size: 9px;
+    text-align: center;
+    text-shadow: 0 0 5px #00ff66;
+}
+
+/* ===== TASKBAR ===== */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    background: #000;
+    border-top: 1.5px solid #00ff66;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    z-index: 9999;
+    gap: 8px;
+}
+.start-btn {
+    background: #00ff66;
+    color: #000;
+    border: none;
+    padding: 3px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+.start-btn:hover {
+    box-shadow: 0 0 10px #00ff66;
+}
+.taskbar-items {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    overflow-x: auto;
+}
+.task-item {
+    border: 1px solid #00ff66;
+    padding: 2px 10px;
+    font-size: 10px;
+    cursor: pointer;
+    background: rgba(0, 255, 102, 0.05);
+    white-space: nowrap;
+    color: #88cc88;
+}
+.task-item.active {
+    background: rgba(0, 255, 102, 0.25);
+    color: #00ff66;
+}
+.taskbar-clock {
+    color: #00ff66;
+    font-size: 11px;
+    padding: 0 6px;
+    border-left: 1px solid #00ff66;
+    padding-left: 10px;
+}
+
+/* ===== NOTIFICATION ===== */
+.notification {
+    position: fixed;
+    bottom: 48px;
+    right: 20px;
+    background: #000;
+    border: 1px solid #00ff66;
+    padding: 10px 16px;
+    display: none;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+    z-index: 10000;
+    font-size: 12px;
+    color: #00ff66;
+    max-width: 300px;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-    .hacker-dashboard {
-        grid-template-columns: 1fr 1fr;
-    }
+    #win-console { width: 350px; height: 240px; left: 10px; }
+    #win-matrix { width: 300px; height: 200px; left: 380px; }
+    #win-cracker { width: 350px; height: 260px; left: 10px; top: 270px; }
+    .icons-grid { grid-template-columns: repeat(2, 70px); gap: 10px; }
 }
 
 @media (max-width: 768px) {
-    .hacker-dashboard {
-        grid-template-columns: 1fr;
-    }
-    .top-bar {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-    }
-    .user-info {
-        justify-content: center;
-    }
-    .glitch-text {
-        font-size: 1.2rem;
-    }
-    .login-box {
-        padding: 25px 18px;
-        width: 95%;
-    }
-    .login-box h1 {
-        font-size: 1.5rem;
-    }
-    .dp-circle {
-        width: 80px;
-        height: 80px;
-    }
+    .desktop { padding: 6px; height: calc(100vh - 38px); }
+    #win-console { width: 90%; height: 200px; left: 5%; top: 10px; }
+    #win-matrix { width: 90%; height: 180px; left: 5%; top: 225px; }
+    #win-cracker { width: 90%; height: 240px; left: 5%; top: 420px; }
+    .icons-grid { grid-template-columns: repeat(2, 65px); gap: 8px; right: 8px; top: 8px; }
+    .icon-btn svg { width: 24px; height: 24px; }
+    .icon-btn span { font-size: 8px; }
+    .taskbar-items { display: none; }
+    .taskbar-clock { font-size: 10px; }
+    .login-box { padding: 30px 20px; }
+    .dp-circle { width: 80px; height: 80px; }
 }
 
 @media (max-width: 480px) {
-    .main-content {
-        padding: 10px;
-    }
-    .hacker-card {
-        padding: 8px;
-    }
-    .hacker-card .card-title {
-        font-size: 0.5rem;
-    }
-    .hacker-card .card-body {
-        font-size: 0.55rem;
-        max-height: 100px;
-    }
-    .action-btn {
-        font-size: 0.45rem;
-        padding: 4px 8px;
-        min-width: 40px;
-    }
-    .glitch-text {
-        font-size: 1rem;
-    }
-    .dp-small {
-        width: 28px;
-        height: 28px;
-    }
-    .dp-circle {
-        width: 70px;
-        height: 70px;
-    }
+    #win-console { height: 170px; }
+    #win-matrix { height: 150px; top: 195px; }
+    #win-cracker { height: 220px; top: 360px; }
+    .window-body { font-size: 10px; padding: 6px; }
+    .input-row label { width: 60px; font-size: 10px; }
+    .input-row input { width: 120px; font-size: 10px; }
+    .crack-display { font-size: 11px; }
+    .icons-grid { grid-template-columns: repeat(2, 55px); gap: 5px; }
+    .icon-btn { padding: 4px; }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .icon-btn span { font-size: 7px; }
+    .dp-circle { width: 65px; height: 65px; }
+    .login-box h1 { font-size: 1.5rem; }
 }
 
-::-webkit-scrollbar {
-    width: 3px;
-}
-::-webkit-scrollbar-track {
-    background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-    background: #00ffff;
-    border-radius: 10px;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #030a03; }
+::-webkit-scrollbar-thumb { background: #00ff66; border-radius: 10px; }
