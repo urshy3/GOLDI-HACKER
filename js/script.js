@@ -1,4 +1,3 @@
-// ===== CREDENTIALS =====
 const VALID_USER = "GOLDI";
 const VALID_PASS = "GOLDI786";
 
