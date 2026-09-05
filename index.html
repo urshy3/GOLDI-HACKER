@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLDI — ANIME HACK</title>
+    <title>GOLDI — HACKER</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- ===== LOGIN PAGE ===== -->
     <div id="loginPage">
-        <video autoplay muted loop playsinline id="bgVideo">
-            <source src="login-video.mp4" type="video/mp4">
-            Your browser does not support video.
-        </video>
-        <div class="video-overlay"></div>
+        <!-- Background Image -->
+        <div class="login-bg" id="loginBg"></div>
+        
+        <!-- Hacking Lines (Binary Rain) -->
+        <canvas id="binaryCanvas"></canvas>
 
         <div class="login-box">
             <div class="dp-container">
@@ -40,8 +40,8 @@
 
     <!-- ===== MAIN PAGE ===== -->
     <div id="mainPage">
-        <div class="main-bg" id="mainBg"></div>
-        <canvas id="hackingLines"></canvas>
+        <div class="main-bg"></div>
+        <canvas id="matrixCanvas"></canvas>
 
         <div class="main-content">
             <!-- Top Bar -->
@@ -54,99 +54,47 @@
                 <button class="logout-btn" onclick="logout()">✕ EXIT</button>
             </div>
 
-            <!-- Dashboard -->
-            <div class="hacker-grid">
-                <!-- Card 1: World Map -->
-                <div class="hacker-card map-card">
-                    <div class="card-title">🗺️ TARGET MAP</div>
-                    <div class="card-content map-container">
-                        <svg class="world-map" viewBox="0 0 800 400" id="worldMap">
-                            <!-- Continents -->
-                            <path class="continent" d="M200,100 Q220,80 250,90 Q280,100 270,130 Q260,160 230,170 Q200,180 190,150 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M350,80 Q380,70 410,85 Q430,100 420,130 Q410,160 380,170 Q350,175 340,150 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M500,120 Q530,100 560,115 Q580,130 570,160 Q560,190 530,200 Q500,205 490,180 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M150,250 Q180,240 210,250 Q230,260 220,290 Q210,320 180,330 Q150,335 140,310 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M300,220 Q330,210 360,220 Q380,230 370,260 Q360,290 330,300 Q300,305 290,280 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M450,250 Q480,240 510,250 Q530,260 520,290 Q510,320 480,330 Q450,335 440,310 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M600,200 Q630,190 660,200 Q680,210 670,240 Q660,270 630,280 Q600,285 590,260 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-                            <path class="continent" d="M250,350 Q280,340 310,350 Q330,360 320,390 Q310,420 280,430 Q250,435 240,410 Z" fill="rgba(0,255,255,0.05)" stroke="#00ffff" stroke-width="1"/>
-
-                            <!-- Grid Lines -->
-                            <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-                            <line x1="0" y1="200" x2="800" y2="200" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-                            <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-                            <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-                            <line x1="400" y1="0" x2="400" y2="400" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-                            <line x1="600" y1="0" x2="600" y2="400" stroke="rgba(0,255,255,0.05)" stroke-width="0.5"/>
-
-                            <!-- Target Dots -->
-                            <circle class="target-dot" cx="230" cy="130" r="6" fill="#ff4444">
-                                <animate attributeName="r" values="4;8;4" dur="1.5s" repeatCount="indefinite"/>
-                                <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
-                                <title>Tokyo, JP 🇯🇵</title>
-                            </circle>
-                            <circle class="target-dot" cx="430" cy="150" r="6" fill="#ff4444">
-                                <animate attributeName="r" values="4;8;4" dur="1.8s" repeatCount="indefinite"/>
-                                <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
-                                <title>Moscow, RU 🇷🇺</title>
-                            </circle>
-                            <circle class="target-dot" cx="580" cy="280" r="6" fill="#ff4444">
-                                <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
-                                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-                                <title>New York, US 🇺🇸</title>
-                            </circle>
-                            <circle class="target-dot" cx="320" cy="400" r="6" fill="#ff4444">
-                                <animate attributeName="r" values="4;8;4" dur="2.2s" repeatCount="indefinite"/>
-                                <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
-                                <title>Sydney, AU 🇦🇺</title>
-                            </circle>
-
-                            <!-- Connection Lines -->
-                            <line x1="230" y1="130" x2="430" y2="150" stroke="rgba(0,255,255,0.2)" stroke-width="1" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" values="0;-20" dur="3s" repeatCount="indefinite"/>
-                            </line>
-                            <line x1="430" y1="150" x2="580" y2="280" stroke="rgba(0,255,255,0.2)" stroke-width="1" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" values="0;-20" dur="4s" repeatCount="indefinite"/>
-                            </line>
-                            <line x1="580" y1="280" x2="320" y2="400" stroke="rgba(0,255,255,0.2)" stroke-width="1" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" values="0;-20" dur="3.5s" repeatCount="indefinite"/>
-                            </line>
-
-                            <text x="10" y="20" fill="rgba(0,255,255,0.3)" font-size="10" font-family="monospace">● 4 TARGETS</text>
-                        </svg>
-                        <div class="map-controls">
-                            <button class="map-btn" onclick="zoomMap('in')">➕</button>
-                            <button class="map-btn" onclick="zoomMap('out')">➖</button>
-                            <button class="map-btn" onclick="resetMap()">⟲</button>
-                        </div>
-                    </div>
-                    <div style="font-size:0.5rem;color:#666;text-align:center;">🖱️ Drag to move • Click targets for info</div>
-                </div>
-
-                <!-- Card 2: Password Cracker -->
+            <!-- ===== HACKER DASHBOARD (Jaise Aapki Image Mein) ===== -->
+            <div class="hacker-dashboard">
+                
+                <!-- Password Cracker -->
                 <div class="hacker-card">
                     <div class="card-title">🔓 PASSWORD CRACKER</div>
-                    <div class="card-content">
-                        <div><span class="highlight">Target:</span> <span id="targetIP">23.86.111.9</span></div>
-                        <div><span class="highlight">Database:</span> User table / Admin role</div>
-                        <div class="pwd-display" id="pwdDisplay">⏳ Waiting...</div>
-                        <div style="font-size:0.55rem;color:#666;margin-top:4px;">
-                            <span class="status-dot yellow" id="crackerStatus"></span>
-                            <span id="crackerStatusText">Idle</span>
+                    <div class="card-body">
+                        <div class="code-block">
+                            get_function() {<br>
+                            &nbsp;&nbsp;return def(),<br>
+                            &nbsp;&nbsp;1,<br>
+                            &nbsp;&nbsp;get_function(x) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;x[0], x = a<br>
+                            &nbsp;&nbsp;}<br>
+                            }
                         </div>
+                        <div class="target-info">
+                            <span class="highlight">Targets:</span> <span id="targetIP">23.86.111.9</span>
+                        </div>
+                        <div class="target-info">
+                            <span class="highlight">Database:</span> User table / Admin role
+                        </div>
+                        <div class="pwd-display" id="pwdDisplay">⏳ Waiting...</div>
+                        <div class="legal-note">⚠️ Any password cracker for cracked and illegal activities will be punished as punishable by death!</div>
                     </div>
                     <div class="action-row">
                         <button class="action-btn green" onclick="crackPassword()">⚡ Crack</button>
                         <button class="action-btn yellow" onclick="resetPassword()">🔄 Reset</button>
-                        <button class="action-btn red" onclick="pwnTarget()">💀 Pwn</button>
+                        <button class="action-btn red" onclick="pwnTarget()">💀 Pwnatrate</button>
                     </div>
                 </div>
 
-                <!-- Card 3: Neural Network -->
+                <!-- Neural Network Tracing -->
                 <div class="hacker-card">
-                    <div class="card-title">🧠 NEURAL NETWORK</div>
-                    <div class="card-content" id="nnOutput">
-                        <div style="color:#666;">⏳ Initializing...</div>
+                    <div class="card-title">🧠 NEURAL NETWORK TRACING</div>
+                    <div class="card-body">
+                        <div class="code-block" id="nnOutput">
+                            // Initializing neural network...<br>
+                            &nbsp;&nbsp;Loading weights...<br>
+                            &nbsp;&nbsp;Training model...
+                        </div>
                     </div>
                     <div class="action-row">
                         <button class="action-btn" onclick="startNN()">▶️ Start</button>
@@ -155,11 +103,16 @@
                     </div>
                 </div>
 
-                <!-- Card 4: Compiling Code -->
+                <!-- Compiling Code -->
                 <div class="hacker-card">
                     <div class="card-title">⚙️ COMPILING CODE</div>
-                    <div class="card-content" id="compileOutput">
-                        <div style="color:#666;">⏳ Ready...</div>
+                    <div class="card-body">
+                        <div class="code-block" id="compileOutput">
+                            a._definePropertyBroken = 10,<br>
+                            b[i] = e<br>
+                            a.migrateVersion = "1.4.1";<br>
+                            var f = () { };
+                        </div>
                     </div>
                     <div class="action-row">
                         <button class="action-btn" onclick="compileCode()">🔨 Compile</button>
@@ -168,11 +121,14 @@
                     </div>
                 </div>
 
-                <!-- Card 5: System Console -->
+                <!-- System Console -->
                 <div class="hacker-card">
                     <div class="card-title">💻 SYSTEM CONSOLE</div>
-                    <div class="card-content" id="consoleOutput">
-                        <div style="color:#666;">⏳ Ready...</div>
+                    <div class="card-body">
+                        <div class="code-block" id="consoleOutput">
+                            # Program Console<br>
+                            &nbsp;&nbsp;Ready...
+                        </div>
                     </div>
                     <div class="action-row">
                         <button class="action-btn" onclick="scanNetwork()">📡 Scan</button>
@@ -181,11 +137,15 @@
                     </div>
                 </div>
 
-                <!-- Card 6: Firewall Bypass -->
+                <!-- Firewall Bypass (New) -->
                 <div class="hacker-card">
                     <div class="card-title">🛡️ FIREWALL BYPASS</div>
-                    <div class="card-content" id="firewallOutput">
-                        <div style="color:#666;">⏳ Firewall active...</div>
+                    <div class="card-body">
+                        <div class="code-block" id="firewallOutput">
+                            🔒 Firewall active...<br>
+                            &nbsp;&nbsp;Port 22 blocked<br>
+                            &nbsp;&nbsp;Port 80 blocked
+                        </div>
                         <div class="firewall-bar">
                             <div class="firewall-fill" id="firewallFill" style="width:0%;"></div>
                         </div>
@@ -198,6 +158,18 @@
                         <button class="action-btn red" onclick="attackFirewall()">⚡ Attack</button>
                     </div>
                 </div>
+
+                <!-- Start Button (Jaise Aapki Image Mein) -->
+                <div class="hacker-card start-card">
+                    <div class="card-title">▶️ START</div>
+                    <div class="card-body">
+                        <button class="start-btn" onclick="startHack()">🚀 INITIATE HACK</button>
+                        <div style="font-size:0.6rem;color:#666;margin-top:8px;">
+                            <span class="status-dot green"></span> System ready
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
